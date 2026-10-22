@@ -1,8 +1,16 @@
 package com.example.praktikum5
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.praktikum5.view.FormIsian
+import com.example.praktikum5.view.TampilData
 
 enum class Navigasi {
     FormulirSaya,
@@ -12,4 +20,27 @@ enum class Navigasi {
 @Composable
 fun DataApp(
     navController: NavHostController = rememberNavController()
-){}
+) {
+    Scaffold { isiRuang ->
+        NavHost(
+            navController = navController,
+            startDestination = Navigasi.FormulirSaya.name,
+
+            modifier = Modifier.padding(isiRuang)
+        ) {
+            composable(route = Navigasi.FormulirSaya.name) {
+                FormIsian(
+                    onSubmitBtnClick = {
+                        navController.navigate(Navigasi.Detail.name)
+                    }
+                )
+            }
+            composable(route = Navigasi.Detail.name) {
+                TampilData(
+                    onBackbtnClick = { cancelAndBackToFormulirSaya(navController) }
+                )
+            }
+        }
+    }
+}
+
