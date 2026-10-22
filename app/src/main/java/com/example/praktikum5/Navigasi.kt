@@ -23,24 +23,29 @@ fun DataApp(
 ) {
     Scaffold { isiRuang ->
         NavHost(
-            navController = navController,
-            startDestination = Navigasi.FormulirSaya.name,
+        navController = navController,
+        startDestination = Navigasi.FormulirSaya.name,
 
-            modifier = Modifier.padding(isiRuang)
-        ) {
-            composable(route = Navigasi.FormulirSaya.name) {
-                FormIsian(
-                    onSubmitBtnClick = {
-                        navController.navigate(Navigasi.Detail.name)
-                    }
-                )
-            }
-            composable(route = Navigasi.Detail.name) {
-                TampilData(
-                    onBackbtnClick = { cancelAndBackToFormulirSaya(navController) }
-                )
-            }
+        modifier = Modifier.padding(isiRuang)
+    ) {
+        composable(route = Navigasi.FormulirSaya.name) {
+            FormIsian(
+                onSubmitBtnClick = {
+                    navController.navigate(Navigasi.Detail.name)
+                }
+            )
         }
+        composable(route = Navigasi.Detail.name){
+            TampilData (
+                onBackbtnClick = {cancelAndBackToFormulirSaya(navController)}
+            )
+        }
+    }
     }
 }
 
+private fun cancelAndBackToFormulirSaya(
+    navController: NavHostController
+){
+    navController.popBackStack(Navigasi.FormulirSaya.name, false)
+}
