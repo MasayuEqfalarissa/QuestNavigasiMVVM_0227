@@ -1,6 +1,8 @@
 package com.example.praktikum5
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 enum class Navigasi {
     FormulirSaya,
@@ -9,5 +11,5 @@ enum class Navigasi {
 
 @Composable
 fun DataApp(
-
+    navController: NavHostController = rememberNavController()
 ){}
